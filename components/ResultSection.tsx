@@ -16,6 +16,9 @@ function buildDiagnosisText(result: DiagnosisResult): string {
   return [
     "【九星気学 診断結果】",
     `本命星：${result.star}`,
+    `月命星：${result.getsumeiStar}`,
+    `日命星：${result.nisshomeiStar}`,
+    `傾斜宮：${result.keishakyu}`,
     `転機指数：${result.turningPointScore}点（${result.currentPhase}）`,
     `仕事運：${stars(result.workLuck)}`,
     `金運：${stars(result.moneyLuck)}`,
@@ -130,22 +133,38 @@ export default function ResultSection({ result, formData }: Props) {
           </h2>
         </div>
 
-        {/* 本命星 */}
-        <div className="text-center py-12 rounded-2xl" style={{ background: "radial-gradient(ellipse, #1a1a4e 0%, #0d0d2b 100%)", border: "1px solid rgba(201,168,76,0.4)" }}>
-          <p className="text-sm tracking-widest mb-4" style={{ color: "#c9a84c" }}>HONMEI-SEI</p>
-          <p
-            className="text-5xl md:text-6xl font-bold"
-            style={{
-              background: "linear-gradient(135deg, #c9a84c, #e8c97a, #c9a84c)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
-          >
-            {result.star}
-          </p>
-          <p className="mt-4" style={{ color: "#8a7a6a" }}>
-            {formData.prefecture}{formData.city && `・${formData.city}`}
-          </p>
+        {/* 九星盤サマリー */}
+        <div className="rounded-2xl overflow-hidden" style={{ background: "radial-gradient(ellipse, #1a1a4e 0%, #0d0d2b 100%)", border: "1px solid rgba(201,168,76,0.4)" }}>
+          <div className="text-center pt-10 pb-6 px-6">
+            <p className="text-sm tracking-widest mb-4" style={{ color: "#c9a84c" }}>HONMEI-SEI</p>
+            <p
+              className="text-5xl md:text-6xl font-bold"
+              style={{
+                background: "linear-gradient(135deg, #c9a84c, #e8c97a, #c9a84c)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              {result.star}
+            </p>
+            <p className="mt-2 text-sm" style={{ color: "#8a7a6a" }}>
+              {formData.prefecture}{formData.city && `・${formData.city}`}
+            </p>
+          </div>
+          {/* 月命星・日命星・傾斜宮 */}
+          <div className="grid grid-cols-3 divide-x" style={{ borderTop: "1px solid rgba(201,168,76,0.25)", borderColor: "rgba(201,168,76,0.2)" }}>
+            {[
+              { label: "月命星", value: result.getsumeiStar, sub: "隠れた才能" },
+              { label: "日命星", value: result.nisshomeiStar, sub: "仕事・天職" },
+              { label: "傾斜宮", value: result.keishakyu.replace("傾斜", ""), sub: "魅力・恋愛" },
+            ].map(({ label, value, sub }) => (
+              <div key={label} className="text-center py-5 px-2" style={{ borderColor: "rgba(201,168,76,0.2)" }}>
+                <p className="text-xs mb-1" style={{ color: "#8a7a6a" }}>{label}</p>
+                <p className="text-sm font-bold" style={{ color: "#e8c97a" }}>{value}</p>
+                <p className="text-xs mt-1" style={{ color: "#6a6a8a" }}>{sub}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* 現在の運気 */}
@@ -216,6 +235,58 @@ export default function ResultSection({ result, formData }: Props) {
             ))}
           </div>
         </div>
+
+        {/* 4つの鑑定カード */}
+        {[
+          {
+            label: "本命星",
+            badge: result.star,
+            title: "気質と個性",
+            desc: result.honmeiDescription,
+            color: "#c9a84c",
+          },
+          {
+            label: "月命星",
+            badge: result.getsumeiStar,
+            title: "隠れた才能",
+            desc: result.getsumeiDescription,
+            color: "#9a8abf",
+          },
+          {
+            label: "日命星",
+            badge: result.nisshomeiStar,
+            title: "仕事運・天職",
+            desc: result.nisshomeiDescription,
+            color: "#7aaabf",
+          },
+          {
+            label: "傾斜宮",
+            badge: result.keishakyu,
+            title: "魅力・恋愛力",
+            desc: result.keishakyuDescription,
+            color: "#bf8a9a",
+          },
+        ].map(({ label, badge, title, desc, color }) => (
+          <div key={label} style={cardStyle}>
+            <div className="flex items-center gap-3 mb-3">
+              <span
+                className="px-3 py-1 rounded-full text-xs font-bold"
+                style={{ background: `${color}22`, color, border: `1px solid ${color}55` }}
+              >
+                {label}
+              </span>
+              <span className="font-bold text-sm" style={{ color }}>
+                【{badge}】
+              </span>
+            </div>
+            <p className="text-sm font-bold mb-2" style={{ color: "#f0e8d8" }}>
+              {title}
+            </p>
+            <p className="text-sm leading-relaxed" style={{ color: "#c8b89a" }}>
+              {desc}
+            </p>
+          </div>
+        ))}
 
         {/* 方位診断（チラ見せ） */}
         <div
