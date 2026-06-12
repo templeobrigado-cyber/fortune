@@ -158,5 +158,30 @@ body {
 }
 
 @media (max-width: 640px) {
-  .compass-wrap { width: 170vmin !important; opacity: .4 !important; }
+  /* 方位盤：モバイルでさらに薄く（現在値 .4 の 60%） */
+  .compass-wrap { width: 170vmin !important; opacity: .24 !important; }
+
+  /* バッジ・trust行のletter-spacing圧縮（0.3em超→0.18em） */
+  .hero-badge {
+    letter-spacing: .18em;
+    text-indent: .18em;
+  }
+
+  /* グラデーション文字 → モバイルでは単色化（コントラスト確保＋輪郭明瞭化） */
+  .word-attack {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+    -webkit-text-fill-color: #E8C766 !important;
+    color: #E8C766 !important;
+    filter: drop-shadow(0 0 14px rgba(232,199,102,.28)) !important;
+  }
+  .word-guard {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+    -webkit-text-fill-color: #BFB3E8 !important;
+    color: #BFB3E8 !important;
+    filter: drop-shadow(0 0 14px rgba(191,179,232,.22)) !important;
+  }
 }

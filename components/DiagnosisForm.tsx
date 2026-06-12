@@ -95,7 +95,7 @@ export default function DiagnosisForm({ onSubmit }: Props) {
           <h2 className="text-3xl md:text-4xl font-bold" style={{ color: "#f0e8d8" }}>
             無料診断
           </h2>
-          <p className="mt-4" style={{ color: "#8a7a6a" }}>
+          <p className="mt-4" style={{ color: "#a09080" }}>
             生年月日・性別・お住まいを入力して診断スタート
           </p>
         </div>
@@ -219,7 +219,7 @@ export default function DiagnosisForm({ onSubmit }: Props) {
                   key={theme}
                   type="button"
                   onClick={() => toggleTheme(theme)}
-                  className="px-4 py-2 rounded-full text-sm transition-all"
+                  className="px-4 py-3 rounded-full text-sm transition-all"
                   style={{
                     background: formData.themes.includes(theme) ? "rgba(201,168,76,0.2)" : "transparent",
                     border: formData.themes.includes(theme) ? "1px solid #c9a84c" : "1px solid rgba(201,168,76,0.25)",

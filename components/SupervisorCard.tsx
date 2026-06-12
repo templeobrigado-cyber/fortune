@@ -145,8 +145,8 @@ export default function SupervisorCard() {
 
           {/* 導線文 */}
           <p style={{
-            fontSize: "clamp(13px,1.5vw,15px)",
-            lineHeight: 2.0,
+            fontSize: "clamp(14px,1.5vw,15px)",
+            lineHeight: 1.9,
             letterSpacing: ".06em",
             color: "rgba(175,160,224,.8)",
           }}>

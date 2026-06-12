@@ -135,41 +135,57 @@ export default function HeroSection() {
         </svg>
       </div>
 
+      {/* テキスト保護スクリム（SVGとコンテンツの間） */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(8,11,24,0.52) 15%, transparent 72%)",
+          pointerEvents: "none",
+          zIndex: 1,
+        }}
+      />
+
       {/* コンテンツ */}
       <div style={{ position: "relative", zIndex: 2, maxWidth: "1100px", width: "100%" }}>
         <p className="hero-badge">九星気学 × 開運戦略診断</p>
 
-        {/* 監修クレジット */}
+        {/* 監修クレジット（C階層：#E8C766 = 11.94:1 ✅ / 最小12px） */}
         <p style={{
           marginTop: "14px",
           fontFamily: "var(--gothic)",
-          fontSize: "clamp(11px,1.2vw,13px)",
-          letterSpacing: ".32em",
-          textIndent: ".32em",
-          color: "rgba(217,180,91,.55)",
+          fontSize: "clamp(12px,1.2vw,13px)",
+          letterSpacing: ".28em",
+          textIndent: ".28em",
+          fontWeight: 400,
+          color: "#E8C766",
           opacity: 0,
           animation: "fade 1s ease .4s forwards",
         }}>
           青山の開運鑑定士・清水淳陽 監修
         </p>
 
+        {/* h1：最小サイズをS/A階層仕様に合わせて調整 */}
         <h1 style={{
           marginTop: "clamp(36px,6vh,56px)",
           fontWeight: 700,
           lineHeight: 1.5,
           letterSpacing: ".06em",
         }}>
+          {/* A階層：最小20px */}
           <span style={{
             display: "block",
-            fontSize: "clamp(24px,4.2vw,44px)",
+            fontSize: "clamp(20px,4.2vw,44px)",
             opacity: 0,
             animation: "rise 1s cubic-bezier(.22,1,.36,1) .35s forwards",
           }}>
             あなたは今、
           </span>
+          {/* S階層：最小30px */}
           <span style={{
             display: "block",
-            fontSize: "clamp(34px,6.6vw,76px)",
+            fontSize: "clamp(30px,6.6vw,76px)",
             marginTop: ".1em",
             opacity: 0,
             animation: "rise 1s cubic-bezier(.22,1,.36,1) .65s forwards",
@@ -177,8 +193,9 @@ export default function HeroSection() {
             <span style={{ color: "var(--ivory-dim)", fontWeight: 500 }}>「</span>
             <span className="word-attack">攻めるべき時期</span>
             <span style={{ color: "var(--ivory-dim)", fontWeight: 500 }}>」</span>
-            <span style={{ fontSize: ".62em", color: "var(--ivory)", fontWeight: 600, letterSpacing: ".04em" }}>ですか？</span>
+            <span style={{ fontSize: ".55em", color: "var(--ivory)", fontWeight: 600, letterSpacing: ".04em" }}>ですか？</span>
           </span>
+          {/* A階層：最小20px */}
           <span style={{
             display: "block",
             fontSize: "clamp(20px,3.4vw,36px)",
@@ -190,9 +207,10 @@ export default function HeroSection() {
           }}>
             それとも──
           </span>
+          {/* S階層：最小30px */}
           <span style={{
             display: "block",
-            fontSize: "clamp(34px,6.6vw,76px)",
+            fontSize: "clamp(30px,6.6vw,76px)",
             marginTop: ".1em",
             opacity: 0,
             animation: "rise 1s cubic-bezier(.22,1,.36,1) 1.3s forwards",
@@ -200,7 +218,7 @@ export default function HeroSection() {
             <span style={{ color: "var(--ivory-dim)", fontWeight: 500 }}>「</span>
             <span className="word-guard">守るべき時期</span>
             <span style={{ color: "var(--ivory-dim)", fontWeight: 500 }}>」</span>
-            <span style={{ fontSize: ".62em", color: "var(--ivory)", fontWeight: 600, letterSpacing: ".04em" }}>ですか？</span>
+            <span style={{ fontSize: ".55em", color: "var(--ivory)", fontWeight: 600, letterSpacing: ".04em" }}>ですか？</span>
           </span>
         </h1>
 
@@ -222,10 +240,10 @@ export default function HeroSection() {
           opacity: 0,
           animation: "rise 1s cubic-bezier(.22,1,.36,1) 1.85s forwards",
         }}>
-          {/* メインリード */}
+          {/* メインリード（A階層：最小15px / #rgba(ivory,.92) = 13.24:1 ✅） */}
           <p style={{
             fontSize: "clamp(15px,2vw,20px)",
-            lineHeight: 2.0,
+            lineHeight: 1.95,
             letterSpacing: ".1em",
             color: "rgba(244,239,226,.92)",
           }}>
@@ -235,12 +253,12 @@ export default function HeroSection() {
             <br />
             易学・気学のプロがあなたの転機を読み解きます。
           </p>
-          {/* サブリード */}
+          {/* サブリード（C階層：最小14px / #rgba(ivory,.52) = 5.11:1 ✅） */}
           <p style={{
             marginTop: "clamp(10px,1.5vh,16px)",
-            fontSize: "clamp(12px,1.4vw,15px)",
-            lineHeight: 2.0,
-            letterSpacing: ".12em",
+            fontSize: "clamp(14px,1.4vw,15px)",
+            lineHeight: 1.9,
+            letterSpacing: ".1em",
             color: "rgba(244,239,226,.52)",
           }}>
             生年月日と居住地から、人生の転機と開運方位を診断します。
@@ -262,16 +280,19 @@ export default function HeroSection() {
             <span className="arrow" aria-hidden="true">→</span>
           </a>
 
+          {/* trust行：モバイルで折り返し対応（flex-wrap, gap縮小） */}
           <p style={{
             marginTop: "22px",
             fontFamily: "var(--gothic)",
-            fontSize: "clamp(11px,1.4vw,13px)",
-            letterSpacing: ".22em",
+            fontSize: "clamp(12px,1.4vw,13px)",
+            letterSpacing: ".18em",
             color: "var(--ivory-dim)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            gap: "18px",
+            flexWrap: "wrap",
+            gap: "clamp(10px,2vw,18px)",
+            rowGap: "8px",
             opacity: 0,
             animation: "fade 1s ease 2.5s forwards",
           }}>
