@@ -1,11 +1,76 @@
 "use client";
 
+import { useState } from "react";
 import { DiagnosisResult } from "@/lib/kyusei";
 import type { FormData } from "@/app/page";
 
 interface Props {
   result: DiagnosisResult;
   formData: FormData;
+}
+
+const LINE_URL = "https://line.me/R/ti/p/%40qfw8348c";
+
+function buildDiagnosisText(result: DiagnosisResult): string {
+  const stars = (n: number) => "★".repeat(n) + "☆".repeat(5 - n);
+  return [
+    "【九星気学 診断結果】",
+    `本命星：${result.star}`,
+    `転機指数：${result.turningPointScore}点（${result.currentPhase}）`,
+    `仕事運：${stars(result.workLuck)}`,
+    `金運：${stars(result.moneyLuck)}`,
+    `人間関係運：${stars(result.relationLuck)}`,
+    `キーワード：${result.keywords.join("・")}`,
+    "",
+    "↑この結果をLINEに貼り付けて送ってください✨",
+  ].join("\n");
+}
+
+function LineRegisterButton({ result }: { result: DiagnosisResult }) {
+  const [copied, setCopied] = useState(false);
+  const [step, setStep] = useState<"idle" | "copied">("idle");
+
+  function handleClick() {
+    const text = buildDiagnosisText(result);
+    navigator.clipboard.writeText(text).catch(() => {
+      // fallback: select text
+    });
+    setCopied(true);
+    setStep("copied");
+    setTimeout(() => {
+      window.open(LINE_URL, "_blank");
+    }, 600);
+  }
+
+  return (
+    <div>
+      {step === "copied" && (
+        <div
+          className="mb-4 p-4 rounded-xl text-sm text-left"
+          style={{ background: "rgba(6,199,85,0.12)", border: "1px solid rgba(6,199,85,0.4)", color: "#a0e8a0" }}
+        >
+          ✅ 診断結果をコピーしました！<br />
+          <span style={{ color: "#c8e8c8" }}>LINEが開いたら、トーク画面に貼り付けて送ってください。</span>
+        </div>
+      )}
+      <button
+        onClick={handleClick}
+        className="w-full py-5 text-lg font-bold rounded-full transition-all"
+        style={{
+          background: copied
+            ? "linear-gradient(135deg, #00a844, #007733)"
+            : "linear-gradient(135deg, #06c755, #00a844)",
+          color: "#fff",
+          boxShadow: "0 4px 30px rgba(6,199,85,0.4)",
+        }}
+      >
+        {copied ? "✅ LINEを開いています..." : "LINE登録して続きを見る →"}
+      </button>
+      <p className="mt-3 text-xs text-center" style={{ color: "#6a9a6a" }}>
+        ※ 登録後、診断結果をトークに貼り付けると詳細レポートをお送りします
+      </p>
+    </div>
+  );
 }
 
 function Stars({ score, max = 5 }: { score: number; max?: number }) {
@@ -226,24 +291,7 @@ export default function ResultSection({ result, formData }: Props) {
             ))}
           </div>
 
-          <button
-            className="w-full py-5 text-lg font-bold rounded-full transition-all"
-            style={{
-              background: "linear-gradient(135deg, #06c755, #00a844)",
-              color: "#fff",
-              boxShadow: "0 4px 30px rgba(6,199,85,0.4)",
-            }}
-            onMouseEnter={(e) => {
-              (e.target as HTMLElement).style.transform = "translateY(-2px)";
-              (e.target as HTMLElement).style.boxShadow = "0 8px 40px rgba(6,199,85,0.6)";
-            }}
-            onMouseLeave={(e) => {
-              (e.target as HTMLElement).style.transform = "translateY(0)";
-              (e.target as HTMLElement).style.boxShadow = "0 4px 30px rgba(6,199,85,0.4)";
-            }}
-          >
-            LINE登録して続きを見る →
-          </button>
+          <LineRegisterButton result={result} />
 
           <p className="mt-4 text-sm" style={{ color: "#6a8a6a" }}>
             登録無料・いつでも解除できます
