@@ -62,14 +62,21 @@ function getKyuseiYear(date: Date): number {
   return year;
 }
 
-// 本命星を計算（1900年〜）
+// 年の各桁の和を1桁になるまで繰り返す
+function digitSum(n: number): number {
+  while (n >= 10) {
+    n = String(n).split("").reduce((a, b) => a + parseInt(b), 0);
+  }
+  return n;
+}
+
+// 本命星を計算
 export function calcHonmeiStar(birthDate: Date): { star: KyuseiStar; number: number } {
   const year = getKyuseiYear(birthDate);
-  let n = (year - 1864) % 9;
-  if (n <= 0) n += 9;
-  // 九星は逆順（11 - n）
-  let starNum = 11 - n;
+  const s = digitSum(year);
+  let starNum = 11 - s;
   if (starNum > 9) starNum -= 9;
+  if (starNum <= 0) starNum += 9;
   return { star: STARS[starNum - 1], number: starNum };
 }
 
@@ -94,10 +101,10 @@ function calcYearLuck(starNum: number, currentYear: number): number {
 }
 
 function getYearStar(year: number): number {
-  let n = (year - 1864) % 9;
-  if (n <= 0) n += 9;
-  let starNum = 11 - n;
+  const s = digitSum(year);
+  let starNum = 11 - s;
   if (starNum > 9) starNum -= 9;
+  if (starNum <= 0) starNum += 9;
   return starNum;
 }
 
