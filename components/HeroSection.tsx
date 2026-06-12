@@ -1,3 +1,17 @@
+// 固定の星データ（Math.random()はhydration mismatchを引き起こすため使用不可）
+const STARS = [
+  { w: 2, op: 0.5, top: 8, left: 12 }, { w: 1.5, op: 0.3, top: 15, left: 78 },
+  { w: 3, op: 0.7, top: 22, left: 45 }, { w: 1, op: 0.4, top: 31, left: 90 },
+  { w: 2.5, op: 0.6, top: 5, left: 60 }, { w: 1.5, op: 0.3, top: 42, left: 25 },
+  { w: 2, op: 0.5, top: 55, left: 83 }, { w: 3, op: 0.4, top: 18, left: 33 },
+  { w: 1, op: 0.7, top: 70, left: 10 }, { w: 2, op: 0.3, top: 65, left: 55 },
+  { w: 2.5, op: 0.5, top: 38, left: 68 }, { w: 1.5, op: 0.6, top: 80, left: 40 },
+  { w: 1, op: 0.4, top: 12, left: 95 }, { w: 3, op: 0.3, top: 50, left: 72 },
+  { w: 2, op: 0.5, top: 88, left: 18 }, { w: 1.5, op: 0.7, top: 75, left: 88 },
+  { w: 2.5, op: 0.4, top: 28, left: 5 }, { w: 1, op: 0.6, top: 92, left: 62 },
+  { w: 2, op: 0.3, top: 45, left: 48 }, { w: 3, op: 0.5, top: 60, left: 30 },
+];
+
 export default function HeroSection() {
   return (
     <section
@@ -8,17 +22,17 @@ export default function HeroSection() {
     >
       {/* 星のデコレーション */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
+        {STARS.map((star, i) => (
           <div
             key={i}
             className="absolute rounded-full"
             style={{
-              width: Math.random() * 3 + 1 + "px",
-              height: Math.random() * 3 + 1 + "px",
+              width: star.w + "px",
+              height: star.w + "px",
               backgroundColor: "#c9a84c",
-              opacity: Math.random() * 0.6 + 0.2,
-              top: Math.random() * 100 + "%",
-              left: Math.random() * 100 + "%",
+              opacity: star.op,
+              top: star.top + "%",
+              left: star.left + "%",
             }}
           />
         ))}
