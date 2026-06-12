@@ -70,7 +70,7 @@ function LineRegisterButton({ result }: { result: DiagnosisResult }) {
         {copied ? "✅ LINEを開いています..." : "LINE登録して続きを見る →"}
       </button>
       <p className="mt-3 text-xs text-center" style={{ color: "#6a9a6a" }}>
-        ※ 登録後、診断結果をトークに貼り付けると詳細レポートをお送りします
+        ※ 登録後、診断結果をトークに貼り付けて送ってください
       </p>
     </div>
   );
@@ -337,12 +337,12 @@ export default function ResultSection({ result, formData }: Props) {
             LINE登録特典
           </div>
           <h3 className="text-2xl font-bold mb-4" style={{ color: "#f0e8d8" }}>
-            あなた専用の
+            さらに詳しい鑑定結果を
             <br />
-            分析結果を作成済みです。
+            LINEでお届けします。
           </h3>
           <p className="mb-6" style={{ color: "#a0c8a8" }}>
-            LINE登録で続きを確認できます
+            診断結果を送っていただくと、占い師が個別に回答します
           </p>
 
           <div className="text-left mb-8 space-y-3">
