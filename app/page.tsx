@@ -6,6 +6,8 @@ import ConcernSection from "@/components/ConcernSection";
 import WhatYouLearnSection from "@/components/WhatYouLearnSection";
 import DiagnosisForm from "@/components/DiagnosisForm";
 import ResultSection from "@/components/ResultSection";
+import SupervisorCard from "@/components/SupervisorCard";
+import SplashScreen from "@/components/SplashScreen";
 import { DiagnosisResult, diagnose } from "@/lib/kyusei";
 
 export type FormData = {
@@ -37,16 +39,27 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen" style={{ background: "linear-gradient(180deg, #0d0d2b 0%, #0a0a0f 30%)" }}>
-      <HeroSection />
-      <ConcernSection />
-      <WhatYouLearnSection />
-      <DiagnosisForm onSubmit={handleDiagnose} />
-      {result && formData && (
-        <div id="result">
-          <ResultSection result={result} formData={formData} />
-        </div>
-      )}
-    </main>
+    <>
+      {/* スプラッシュ：ヒーローのDOMはすでにレンダリング済み、上に被せる */}
+      <SplashScreen />
+
+      <main className="min-h-screen" style={{ background: "linear-gradient(180deg, #0d0d2b 0%, #0a0a0f 30%)" }}>
+        <HeroSection />
+        <ConcernSection />
+        <WhatYouLearnSection />
+        <DiagnosisForm onSubmit={handleDiagnose} />
+
+        {/* フォーム直後の監修者カード */}
+        <SupervisorCard />
+
+        {result && formData && (
+          <div id="result">
+            <ResultSection result={result} formData={formData} />
+            {/* 診断結果末尾にも監修者カードを再掲 */}
+            <SupervisorCard />
+          </div>
+        )}
+      </main>
+    </>
   );
 }

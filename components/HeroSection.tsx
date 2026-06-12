@@ -139,6 +139,20 @@ export default function HeroSection() {
       <div style={{ position: "relative", zIndex: 2, maxWidth: "1100px", width: "100%" }}>
         <p className="hero-badge">九星気学 × 開運戦略診断</p>
 
+        {/* 監修クレジット */}
+        <p style={{
+          marginTop: "14px",
+          fontFamily: "var(--gothic)",
+          fontSize: "clamp(11px,1.2vw,13px)",
+          letterSpacing: ".32em",
+          textIndent: ".32em",
+          color: "rgba(217,180,91,.55)",
+          opacity: 0,
+          animation: "fade 1s ease .4s forwards",
+        }}>
+          青山の開運鑑定士・清水淳陽 監修
+        </p>
+
         <h1 style={{
           marginTop: "clamp(36px,6vh,56px)",
           fontWeight: 700,
@@ -203,23 +217,35 @@ export default function HeroSection() {
           }}
         />
 
-        {/* リード文 */}
-        <p style={{
-          fontSize: "clamp(14px,1.9vw,18px)",
-          lineHeight: 2.2,
-          letterSpacing: ".12em",
-          color: "rgba(244,239,226,.88)",
+        {/* リード文（2段） */}
+        <div style={{
           opacity: 0,
           animation: "rise 1s cubic-bezier(.22,1,.36,1) 1.85s forwards",
         }}>
-          生年月日と居住地から、
-          <em style={{ fontStyle: "normal", color: "var(--gold-bright)", borderBottom: "1px solid rgba(217,180,91,.4)", paddingBottom: "2px" }}>人生の転機</em>
-          と
-          <em style={{ fontStyle: "normal", color: "var(--gold-bright)", borderBottom: "1px solid rgba(217,180,91,.4)", paddingBottom: "2px" }}>開運方位</em>
-          を診断。
-          <br />
-          仕事・独立・転職・人間関係の意思決定をサポートします。
-        </p>
+          {/* メインリード */}
+          <p style={{
+            fontSize: "clamp(15px,2vw,20px)",
+            lineHeight: 2.0,
+            letterSpacing: ".1em",
+            color: "rgba(244,239,226,.92)",
+          }}>
+            恋愛も、仕事も、独立も。
+            <em style={{ fontStyle: "normal", color: "var(--gold-bright)", borderBottom: "1px solid rgba(217,180,91,.4)", paddingBottom: "2px" }}>"いつ動くか"</em>
+            で結果は変わる。
+            <br />
+            易学・気学のプロがあなたの転機を読み解きます。
+          </p>
+          {/* サブリード */}
+          <p style={{
+            marginTop: "clamp(10px,1.5vh,16px)",
+            fontSize: "clamp(12px,1.4vw,15px)",
+            lineHeight: 2.0,
+            letterSpacing: ".12em",
+            color: "rgba(244,239,226,.52)",
+          }}>
+            生年月日と居住地から、人生の転機と開運方位を診断します。
+          </p>
+        </div>
 
         {/* CTA */}
         <div style={{
