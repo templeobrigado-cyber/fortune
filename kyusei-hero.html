@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九星気学 × 開運戦略診断｜あなたは今、攻める時期か守る時期か</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#080B18;
+  --ink-2:#101730;
+  --ink-3:#1A2348;
+  --gold:#D9B45B;
+  --gold-bright:#F2DA96;
+  --gold-deep:#9C7A2E;
+  --fuji:#AFA0E0;
+  --fuji-soft:#CEC4F0;
+  --ivory:#F4EFE2;
+  --ivory-dim:#B9B4A6;
+  --serif:'Shippori Mincho B1', serif;
+  --gothic:'Zen Kaku Gothic New', sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--serif);
+  background:var(--ink);
+  color:var(--ivory);
+  overflow-x:hidden;
+}
+
+/* ============ HERO ============ */
+.hero{
+  position:relative;
+  min-height:100svh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:clamp(48px,8vh,96px) 24px;
+  background:
+    radial-gradient(ellipse 120% 80% at 50% -20%, var(--ink-3) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 60% at 50% 110%, #161230 0%, transparent 55%),
+    linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 55%, var(--ink) 100%);
+  text-align:center;
+}
+
+/* 星空 */
+.stars{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.star{
+  position:absolute;
+  border-radius:50%;
+  background:var(--ivory);
+  opacity:.5;
+  animation:twinkle var(--d,4s) ease-in-out var(--delay,0s) infinite;
+}
+.star.g{background:var(--gold-bright)}
+@keyframes twinkle{
+  0%,100%{opacity:.12;transform:scale(1)}
+  50%{opacity:.7;transform:scale(1.4)}
+}
+
+/* ============ 方位盤（シグネチャー）============ */
+.compass{
+  position:absolute;
+  top:50%;left:50%;
+  width:min(135vmin,1100px);
+  aspect-ratio:1;
+  transform:translate(-50%,-52%);
+  pointer-events:none;
+  opacity:.55;
+}
+.compass svg{width:100%;height:100%;display:block}
+.ring-slow{
+  transform-origin:50% 50%;
+  animation:spin 240s linear infinite;
+}
+.ring-rev{
+  transform-origin:50% 50%;
+  animation:spin 360s linear infinite reverse;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ============ コンテンツ ============ */
+.inner{position:relative;z-index:2;max-width:1100px;width:100%}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:14px;
+  font-family:var(--gothic);
+  font-size:clamp(11px,1.3vw,13px);
+  font-weight:500;
+  letter-spacing:.42em;
+  text-indent:.42em;
+  color:var(--gold-bright);
+  padding:10px 30px;
+  border:1px solid color-mix(in srgb, var(--gold) 45%, transparent);
+  border-radius:999px;
+  position:relative;
+  background:linear-gradient(180deg, rgba(217,180,91,.07), transparent);
+  opacity:0;
+  animation:rise .9s cubic-bezier(.22,1,.36,1) .1s forwards;
+}
+.badge::before,.badge::after{
+  content:"";
+  width:24px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold));
+}
+.badge::after{background:linear-gradient(90deg,var(--gold),transparent)}
+
+h1{
+  margin-top:clamp(36px,6vh,56px);
+  font-weight:700;
+  line-height:1.5;
+  letter-spacing:.06em;
+}
+.line{
+  display:block;
+  opacity:0;
+  animation:rise 1s cubic-bezier(.22,1,.36,1) forwards;
+}
+.line-1{font-size:clamp(24px,4.2vw,44px);animation-delay:.35s}
+.line-2{font-size:clamp(34px,6.6vw,76px);animation-delay:.65s;margin-top:.1em}
+.line-3{font-size:clamp(20px,3.4vw,36px);animation-delay:1.05s;color:var(--ivory-dim);margin-top:.35em;font-weight:600}
+.line-4{font-size:clamp(34px,6.6vw,76px);animation-delay:1.3s;margin-top:.1em}
+
+.q{font-size:.62em;color:var(--ivory);font-weight:600;letter-spacing:.04em}
+.bracket{color:var(--ivory-dim);font-weight:500}
+
+.word-attack{
+  background:linear-gradient(170deg,#F7E3A8 0%,var(--gold-bright) 30%,var(--gold) 58%,var(--gold-deep) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:0 0 60px rgba(217,180,91,.0);
+  filter:drop-shadow(0 0 28px rgba(217,180,91,.35));
+  font-weight:800;
+}
+.word-guard{
+  background:linear-gradient(170deg,#E4DCFA 0%,var(--fuji-soft) 35%,var(--fuji) 70%,#7A6BB8 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 28px rgba(175,160,224,.3));
+  font-weight:800;
+}
+
+.divider{
+  width:1px;height:clamp(32px,5vh,52px);
+  margin:clamp(28px,4.5vh,44px) auto clamp(24px,4vh,36px);
+  background:linear-gradient(180deg,transparent,var(--gold),transparent);
+  opacity:0;
+  animation:fade 1s ease 1.7s forwards;
+}
+
+.lead{
+  font-size:clamp(14px,1.9vw,18px);
+  line-height:2.2;
+  letter-spacing:.12em;
+  color:color-mix(in srgb, var(--ivory) 88%, transparent);
+  opacity:0;
+  animation:rise 1s cubic-bezier(.22,1,.36,1) 1.85s forwards;
+}
+.lead em{
+  font-style:normal;
+  color:var(--gold-bright);
+  border-bottom:1px solid color-mix(in srgb, var(--gold) 40%, transparent);
+  padding-bottom:2px;
+}
+
+/* ============ CTA ============ */
+.cta-wrap{
+  margin-top:clamp(36px,6vh,60px);
+  opacity:0;
+  animation:rise 1s cubic-bezier(.22,1,.36,1) 2.15s forwards;
+}
+.cta{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  gap:16px;
+  font-family:var(--serif);
+  font-size:clamp(16px,2.1vw,19px);
+  font-weight:700;
+  letter-spacing:.18em;
+  text-indent:.09em;
+  color:#241A05;
+  text-decoration:none;
+  padding:clamp(18px,2.4vh,22px) clamp(48px,6vw,72px);
+  border-radius:999px;
+  background:linear-gradient(165deg,#F7E3A8 0%,var(--gold-bright) 25%,var(--gold) 60%,#C29A3F 100%);
+  box-shadow:
+    0 0 0 1px rgba(247,227,168,.5) inset,
+    0 12px 40px -8px rgba(217,180,91,.5),
+    0 4px 14px rgba(0,0,0,.4);
+  transition:transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease;
+  animation:breathe 3.2s ease-in-out infinite;
+}
+@keyframes breathe{
+  0%,100%{box-shadow:0 0 0 1px rgba(247,227,168,.5) inset,0 12px 40px -8px rgba(217,180,91,.45),0 4px 14px rgba(0,0,0,.4)}
+  50%{box-shadow:0 0 0 1px rgba(247,227,168,.6) inset,0 12px 56px -4px rgba(217,180,91,.7),0 4px 14px rgba(0,0,0,.4)}
+}
+.cta:hover{transform:translateY(-3px) scale(1.02)}
+.cta .arrow{
+  display:inline-block;
+  transition:transform .35s cubic-bezier(.22,1,.36,1);
+}
+.cta:hover .arrow{transform:translateX(6px)}
+.cta:focus-visible{outline:3px solid var(--fuji);outline-offset:4px}
+
+.trust{
+  margin-top:22px;
+  font-family:var(--gothic);
+  font-size:clamp(11px,1.4vw,13px);
+  letter-spacing:.22em;
+  color:var(--ivory-dim);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+  opacity:0;
+  animation:fade 1s ease 2.5s forwards;
+}
+.trust .dot{width:3px;height:3px;border-radius:50%;background:var(--gold);opacity:.7}
+
+/* ============ アニメーション基礎 ============ */
+@keyframes rise{
+  from{opacity:0;transform:translateY(26px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes fade{to{opacity:1}}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.01s !important;animation-delay:0s !important}
+  .ring-slow,.ring-rev{animation:none !important}
+  .cta{animation:none}
+}
+
+@media (max-width:640px){
+  h1{line-height:1.55}
+  .lead br.pc{display:none}
+  .compass{width:170vmin;opacity:.4}
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+
+  <!-- 星空 -->
+  <div class="stars" aria-hidden="true" id="stars"></div>
+
+  <!-- 方位盤（九星 八方位） -->
+  <div class="compass" aria-hidden="true">
+    <svg viewBox="0 0 1000 1000" fill="none">
+      <defs>
+        <radialGradient id="fadeMask" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#fff" stop-opacity=".9"/>
+          <stop offset="70%" stop-color="#fff" stop-opacity=".45"/>
+          <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+        </radialGradient>
+        <mask id="m"><rect width="1000" height="1000" fill="url(#fadeMask)"/></mask>
+      </defs>
+      <g mask="url(#m)">
+        <!-- 外周リング：八方位の目盛 -->
+        <g class="ring-slow" stroke="#D9B45B" stroke-opacity=".22">
+          <circle cx="500" cy="500" r="470" stroke-width="1"/>
+          <circle cx="500" cy="500" r="436" stroke-width=".6"/>
+          <g stroke-width="1">
+            <line x1="500" y1="30" x2="500" y2="64"/>
+            <line x1="500" y1="936" x2="500" y2="970"/>
+            <line x1="30" y1="500" x2="64" y2="500"/>
+            <line x1="936" y1="500" x2="970" y2="500"/>
+            <line x1="167.6" y1="167.6" x2="191.7" y2="191.7"/>
+            <line x1="808.3" y1="808.3" x2="832.4" y2="832.4"/>
+            <line x1="167.6" y1="832.4" x2="191.7" y2="808.3"/>
+            <line x1="808.3" y1="191.7" x2="832.4" y2="167.6"/>
+          </g>
+          <!-- 方位文字 -->
+          <g fill="#D9B45B" fill-opacity=".4" stroke="none"
+             font-family="'Shippori Mincho B1',serif" font-size="30" text-anchor="middle">
+            <text x="500" y="108">北</text>
+            <text x="500" y="922">南</text>
+            <text x="906" y="510">東</text>
+            <text x="94" y="510">西</text>
+          </g>
+        </g>
+        <!-- 内周リング：逆回転 -->
+        <g class="ring-rev" stroke="#AFA0E0" stroke-opacity=".18">
+          <circle cx="500" cy="500" r="330" stroke-width=".8"/>
+          <circle cx="500" cy="500" r="300" stroke-width=".5" stroke-dasharray="2 10"/>
+          <!-- 八角形（八方位） -->
+          <path stroke-width=".8" d="M500 200 L712 288 L800 500 L712 712 L500 800 L288 712 L200 500 L288 288 Z"/>
+          <path stroke-width=".5" stroke-opacity=".6" d="M500 200 L500 800 M200 500 L800 500 M288 288 L712 712 M712 288 L288 712"/>
+        </g>
+        <!-- 中央の九星格子 -->
+        <g stroke="#D9B45B" stroke-opacity=".1" stroke-width=".7">
+          <rect x="410" y="410" width="180" height="180"/>
+          <line x1="470" y1="410" x2="470" y2="590"/>
+          <line x1="530" y1="410" x2="530" y2="590"/>
+          <line x1="410" y1="470" x2="590" y2="470"/>
+          <line x1="410" y1="530" x2="590" y2="530"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="inner">
+    <p class="badge">九星気学 × 開運戦略診断</p>
+
+    <h1>
+      <span class="line line-1">あなたは今、</span>
+      <span class="line line-2"><span class="bracket">「</span><span class="word-attack">攻めるべき時期</span><span class="bracket">」</span><span class="q">ですか？</span></span>
+      <span class="line line-3">それとも──</span>
+      <span class="line line-4"><span class="bracket">「</span><span class="word-guard">守るべき時期</span><span class="bracket">」</span><span class="q">ですか？</span></span>
+    </h1>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <p class="lead">
+      生年月日と居住地から、<em>人生の転機</em>と<em>開運方位</em>を診断。<br class="pc">
+      仕事・独立・転職・人間関係の意思決定をサポートします。
+    </p>
+
+    <div class="cta-wrap">
+      <a class="cta" href="#diagnosis">
+        無料で診断する
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <p class="trust">
+        <span>所要時間 約1分</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span>完全無料</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span>登録不要</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+// 星空の生成（軽量・DOM 40個）
+(function(){
+  const c = document.getElementById('stars');
+  const frag = document.createDocumentFragment();
+  for(let i=0;i<40;i++){
+    const s = document.createElement('span');
+    s.className = 'star' + (Math.random()<.3?' g':'');
+    const size = Math.random()*2.2+.8;
+    s.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${(Math.random()*4+3).toFixed(1)}s;--delay:${(Math.random()*5).toFixed(1)}s`;
+    frag.appendChild(s);
+  }
+  c.appendChild(frag);
+})();
+</script>
+
+</body>
+</html>
